@@ -1,0 +1,24 @@
+using Global
+
+~ intro_start
+
+# No player choices here — this is a straight narrated introduction.
+# Reuses the same dialogue balloon system so it matches the rest of the game's look.
+
+Narrator: GUNMAN CORP.
+
+Narrator: A surveillance and targeting technology company. Publicly, a defense contractor. Privately, willing to sell to whoever pays — banned regimes, private militias, anyone the export laws say no to.
+
+Narrator: JASON.
+
+Narrator: A dealmaker. Five years at Gunman Corp, the last two of them closing deals that were never supposed to exist on paper. He's good at his job. That's the whole problem.
+
+Narrator: NOMAN.
+
+Narrator: Head of Corporate Security. Calm, transactional, not angry. He isn't here to find out what Jason did — he already knows. He's here to make sure it stays quiet.
+
+Narrator: Jason is resigning. Gunman Corp would like a word before he goes.
+
+do Global.begin_interview()
+
+=> END

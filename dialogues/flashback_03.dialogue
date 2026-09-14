@@ -1,0 +1,65 @@
+using Global
+
+~ flashback_start
+
+# Setting: Ten months ago. A finance analyst, Priya, has flagged a discrepancy in the export revenue accounts and requested a meeting.
+
+Priya: I'm not trying to cause problems. I just need the account codes on these three transactions to make sense before I close the quarter.
+
+Priya: They're routed through a shell entity I can't find any record of.
+
+- Explain it away with something plausible. [if compliance >= 0]
+	Jason: That's a logistics partner we use for a few overseas accounts. I can get you the paperwork.
+	do compliance += 1
+	=> priya_deflected
+
+- Warn her off, carefully. [if leverage >= 0]
+	Jason: Priya, I'd let this one go. Some accounts are compartmentalized for a reason, and asking too loudly tends to get noticed by the wrong people.
+	do leverage += 1
+	=> priya_warned
+
+- Go over her head immediately.
+	Jason: I'll talk to your director directly about this. No need for you to spend more time on it.
+	do compliance -= 1
+	do leverage += 1
+	=> priya_escalated
+
+~ priya_deflected
+
+Priya: (skeptical, but tired) ...Fine. Send it over and I'll close it out.
+
+Jason: (The paperwork he sent her was real. It just wasn't for this deal.)
+
+do Global.priya_path = "deflected"
+
+=> close_call_end
+
+~ priya_warned
+
+Priya: (a pause, reading between the lines) ...Understood.
+
+Jason: (She closed the quarter without another word. She also stopped making eye contact with him in the hallway after that.)
+
+do Global.priya_path = "warned"
+
+=> close_call_end
+
+~ priya_escalated
+
+Priya: (visibly unsettled) Oh — okay. Sure.
+
+Jason: (Her director called it "handled" within the hour. Jason never found out what that cost, or who paid it.)
+
+do Global.priya_path = "escalated"
+do Global.leverage -= 1
+do Global.roll_escalation_gamble()
+
+=> close_call_end
+
+~ close_call_end
+
+Jason: (It went away. That was the part that scared him — how easily it went away.)
+
+do Global.return_from_flashback()
+
+=> END

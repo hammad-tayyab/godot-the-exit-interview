@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cxhr0qwy8ggdn"
+path="res://.godot/imported/ending_threatened.dialogue-4dfa117ece8080ed49a48ca7c47934b3.tres"
+
+[deps]
+
+source_file="res://dialogues/ending_threatened.dialogue"
+dest_files=["res://.godot/imported/ending_threatened.dialogue-4dfa117ece8080ed49a48ca7c47934b3.tres"]
+
+[params]
+
+defaults=true

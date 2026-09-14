@@ -1,0 +1,74 @@
+using Global
+
+~ flashback_start
+
+# Setting: A year and a half ago. Warehouse floor / shipping office. Marcus, a logistics coordinator, has flagged the manifest.
+
+Marcus: Jason, this manifest doesn't match the export license. End-user field is blank.
+
+Marcus: I can't clear this for shipping without it.
+
+Jason: It's a discretion account. Compliance already looked at it.
+
+Marcus: I called compliance. They said they've never heard of this shipment.
+
+- Tell him the truth, carefully. [if leverage >= 0] => marcus_told
+- Pull rank. [if compliance >= 0] => marcus_pressured
+- Offer him something to look away. => marcus_bought
+
+~ marcus_told
+
+Jason: Because it's not supposed to go through the normal channel, Marcus. That's the point.
+do leverage += 1
+
+Marcus: (long pause) You're telling me to knowingly ship this.
+
+Marcus: I have a kid, Jason. I can't have my name on this if it goes wrong.
+
+Jason: It won't go wrong. It never has.
+
+Marcus: "Never" is doing a lot of work in that sentence.
+
+do Global.marcus_path = "told"
+
+=> shipment_pivot
+
+~ marcus_pressured
+
+Jason: I don't need to explain this to you. Clear it or I'll have someone else clear it.
+do compliance += 1
+do leverage -= 1
+
+Marcus: (jaw tight) Fine. It's cleared. It's your signature on it, not mine.
+
+Marcus: I want that in writing.
+
+Jason: Whatever gets it moving.
+
+do Global.marcus_path = "pressured"
+
+=> shipment_pivot
+
+~ marcus_bought
+
+Jason: Look, if this is about the numbers on your end — I can make sure that's worth your while.
+do leverage += 2
+do compliance -= 1
+
+Marcus: (quiet) ...How much are we talking.
+
+Jason: Enough that this stops being a conversation you have to have again.
+
+Marcus: (he doesn't answer. He clears the manifest.)
+
+do Global.marcus_path = "bought"
+
+=> shipment_pivot
+
+~ shipment_pivot
+
+Jason: (The truck left that night. Marcus stopped making eye contact with him after that.)
+
+do Global.return_from_flashback()
+
+=> END

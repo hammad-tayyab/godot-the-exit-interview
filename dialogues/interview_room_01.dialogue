@@ -1,0 +1,304 @@
+using Global
+
+~ interview_start
+
+Noman: Sit down, Jason.
+
+Noman: No need to make this complicated. You know why you're here.
+
+Noman: You're leaving. Gunman Corp would like to make sure that stays a quiet, uneventful thing for everyone.
+
+- What's the offer? [if compliance >= 0]
+	Jason: Let's skip ahead. What's the offer?
+	do compliance += 1
+	=> deal_offer
+
+- I haven't decided I need anything from you. [if leverage >= 0]
+	Jason: I haven't decided I need anything from you, Noman.
+	do leverage += 2
+	do compliance -= 1
+	=> deal_pushback
+
+- I don't know what you're talking about.
+	Jason: I don't know what you're talking about.
+	do compliance -= 1
+	do leverage += 1
+	=> deal_deny
+
+~ deal_offer
+
+Noman: Straightforward. I like that.
+
+Noman: A severance package. Generous. Signed NDA, and this conversation never happened.
+
+do compliance += 1
+
+=> deal_pivot
+
+~ deal_pushback
+
+Noman: (a thin smile) Careful. That sounded like a negotiation.
+
+Noman: I can do negotiation. Just know there's a version of this where I don't need to.
+
+do leverage += 1
+
+=> deal_pivot
+
+~ deal_deny
+
+Noman: Jason. You closed the deal with three buyers who shouldn't exist on paper. I have the emails.
+
+Noman: We're well past pretending.
+
+do compliance -= 1
+
+=> deal_pivot
+
+~ deal_pivot
+
+Noman: Let's not waste each other's time. Walk me through the first one. The one that started all this.
+
+Jason: (The first buyer. The number that changed everything.)
+
+do Global.trigger_flashback(1, "res://dialogues/interview_room_01.dialogue", "post_flashback_01")
+
+=> END
+
+~ post_flashback_01
+
+Noman: (reads a note) "Compliance handles compliance." Cute line. Whose was it?
+
+- It was mine. I own it. [if compliance >= 0]
+	Jason: Mine. I said it. I meant it, too, back then.
+	do compliance += 1
+	=> shipment_lead_owned
+
+- My manager's. He fed me that line. [if leverage >= 0]
+	Jason: My manager's. He's the one who sold me on it.
+	do leverage += 1
+	=> shipment_lead_deflect
+
+- I don't remember saying that.
+	Jason: I don't remember saying that.
+	do compliance -= 1
+	=> shipment_lead_deny
+
+~ shipment_lead_owned
+
+Noman: Good. Ownership's useful — for both of us.
+
+Noman: Tell me about the first shipment. Not the sale. The part where you signed off on it.
+
+=> shipment_pivot
+
+~ shipment_lead_deflect
+
+Noman: Convenient. Everyone's manager fed them a line eventually.
+
+Noman: Tell me about the first shipment anyway. The one you signed off on.
+
+do compliance -= 1
+
+=> shipment_pivot
+
+~ shipment_lead_deny
+
+Noman: You don't remember. Sure.
+
+Noman: The shipment logs remember for you. Walk me through it.
+
+do leverage -= 1
+
+=> shipment_pivot
+
+~ shipment_pivot
+
+Jason: (The shipment. Marcus asking questions he already knew the answers to.)
+
+do Global.trigger_flashback(2, "res://dialogues/interview_room_01.dialogue", "post_flashback_02")
+
+=> END
+
+~ post_flashback_02
+
+Noman: Marcus. He still works here, you know.
+
+Noman: Doesn't talk much anymore, from what I hear.
+
+- That's not on me. [if compliance >= 0]
+	Jason: That's not on me. He made his choice same as I made mine.
+	do compliance += 1
+	=> close_call_deflect
+
+- I know. I think about that. [if leverage >= 0]
+	Jason: I know. I think about that more than you'd guess.
+	do leverage += 1
+	=> close_call_owned
+
+- I'd rather talk about something else.
+	Jason: I'd rather talk about something else.
+	do compliance -= 1
+	=> close_call_avoid
+
+~ close_call_deflect
+
+Noman: Sure. Everyone made their choice.
+
+Noman: Someone almost unmade yours, though. Internal audit, few months back. Tell me about that.
+
+=> close_call_pivot
+
+~ close_call_owned
+
+Noman: (a flicker of something — surprise, maybe) Noted.
+
+Noman: There was an internal audit that got close to your accounts. Walk me through it.
+
+do leverage += 1
+
+=> close_call_pivot
+
+~ close_call_avoid
+
+Noman: We don't get to choose the topics, Jason. That's not how this works.
+
+Noman: The internal audit. The one that almost found you. Talk.
+
+do compliance -= 1
+
+=> close_call_pivot
+
+~ close_call_pivot
+
+Jason: (Someone in finance had noticed. For three days, Jason didn't sleep.)
+
+do Global.trigger_flashback(3, "res://dialogues/interview_room_01.dialogue", "post_flashback_03")
+
+=> END
+
+~ post_flashback_03
+
+Noman: Priya. Finance. She never filed a formal complaint, you know. That's unusual.
+
+- I made sure of that. [if leverage >= 0]
+	Jason: I made sure of that, one way or another.
+	do leverage += 1
+	=> buyer_returns_lead_owned
+
+- People let things go. [if compliance >= 0]
+	Jason: People let things go, Noman. It doesn't have to mean anything.
+	do compliance += 1
+	=> buyer_returns_lead_soft
+
+- I'd rather not think about that one.
+	Jason: I'd rather not think about that one.
+	do compliance -= 1
+	=> buyer_returns_lead_avoid
+
+~ buyer_returns_lead_owned
+
+Noman: Efficient. That's one word for it.
+
+Noman: Let's talk about six months ago. The buyer who came back wanting more.
+
+=> buyer_returns_pivot
+
+~ buyer_returns_lead_soft
+
+Noman: Some things mean something whether you want them to or not.
+
+Noman: Six months ago. The buyer who came back wanting more. Tell me.
+
+do compliance -= 1
+
+=> buyer_returns_pivot
+
+~ buyer_returns_lead_avoid
+
+Noman: You don't get to skip the parts that are uncomfortable, Jason. That's the whole exercise.
+
+Noman: Six months ago. The buyer who came back. Talk.
+
+do leverage -= 1
+
+=> buyer_returns_pivot
+
+~ buyer_returns_pivot
+
+Jason: (Volkov. Back again. Wanting more than software this time.)
+
+do Global.trigger_flashback(4, "res://dialogues/interview_room_01.dialogue", "post_flashback_04")
+
+=> END
+
+~ post_flashback_04
+
+if Global.priya_path == "escalated" and Global.escalation_backfired:
+	Noman: One more thing, while we're on finance. That director you looped in on the Priya account.
+	Noman: He mentioned it to someone he shouldn't have. Nothing came of it. This time.
+	do Global.leverage -= 1
+elif Global.priya_path == "escalated":
+	Noman: That director you looped in on the Priya account, incidentally — kept his mouth shut. You got lucky there.
+
+Noman: That's the meeting that shows up in your resignation timeline, actually. Two days later, you filed.
+
+Noman: So let's finish where this all ends. Your last day. Your terminal. What did you do with it.
+
+- Tell him straight. [if compliance >= 0]
+	Jason: I'll tell you exactly what I did.
+	do compliance += 1
+	=> reckoning_lead_straight
+
+- Make him work for it. [if leverage >= 0]
+	Jason: That depends on what it's worth to you to know.
+	do leverage += 1
+	=> reckoning_lead_pressed
+
+- Stay quiet.
+	Jason: (says nothing)
+	do compliance -= 1
+	do leverage -= 1
+	=> reckoning_lead_silent
+
+~ reckoning_lead_straight
+
+Noman: Appreciated. Go on, then.
+
+=> reckoning_pivot
+
+~ reckoning_lead_pressed
+
+Noman: (a short, humorless laugh) There it is. Fine. Let's find out what it's worth.
+
+do leverage += 1
+
+=> reckoning_pivot
+
+~ reckoning_lead_silent
+
+Noman: Silence, this late in the conversation, is its own confession.
+
+Noman: Your last day. Go on.
+
+do compliance -= 1
+
+=> reckoning_pivot
+
+~ reckoning_pivot
+
+Jason: (His last day. Access ending at 5pm. One terminal, one last window before it locked him out for good.)
+
+do Global.trigger_flashback(5, "res://dialogues/interview_room_01.dialogue", "post_flashback_05")
+
+=> END
+
+~ post_flashback_05
+
+Noman: (closes the folder) That's everything I need.
+
+Noman: Let's see where that leaves us.
+
+do Global.evaluate_final_ending()
+
+=> END

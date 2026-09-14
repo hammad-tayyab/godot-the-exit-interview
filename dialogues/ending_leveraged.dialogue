@@ -1,0 +1,24 @@
+using Global
+
+~ ending_start
+
+Noman: (long pause, reviewing his notes) You've been more careful than I expected.
+
+Noman: Fine. We'll do this your way.
+
+Jason: I want the severance doubled, and I want it in writing that this conversation never happened — for both our sakes.
+
+Noman: (a beat) Done.
+
+if Global.reckoning_choice == "copied":
+	Noman: I don't know what you took off that terminal on your last day. I have a guess. Let's both pretend I don't.
+elif Global.volkov_path == "held_line":
+	Noman: For what it's worth — the Volkov account. Turning down the hardware interface. That's the only reason this went as smooth as it did.
+
+Jason: (He walked out with more than he came in asking for. He told himself that made him smart. He didn't quite believe it.)
+
+# --- ENDING: LEVERAGED ---
+# Jason outplayed Gunman Corp. He gets the best material outcome —
+# and the game closes on him not being sure that's a win.
+
+=> END

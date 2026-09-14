@@ -1,0 +1,22 @@
+using Global
+
+~ ending_start
+
+Noman: No severance. No goodwill. Just — go.
+
+Noman: And Jason. We'll be watching. Not because we think you're brave enough to talk.
+
+Noman: Because we don't leave that to chance.
+
+if Global.reckoning_choice == "walked":
+	Noman: You didn't even try to take anything with you on the way out. Smartest thing you did the whole time you worked here.
+elif Global.priya_path == "escalated" and Global.escalation_backfired:
+	Noman: That business with the finance director, incidentally. It's part of why this is going the way it's going.
+
+Jason: (He left with nothing. Not even the illusion that he'd earned his way out of it.)
+
+# --- ENDING: THREATENED ---
+# Low Compliance, low Leverage, but not catastrophic. Jason leaves
+# silenced by fear, empty-handed, still under watch.
+
+=> END

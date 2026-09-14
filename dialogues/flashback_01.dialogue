@@ -1,0 +1,63 @@
+using Global
+
+~ flashback_start
+
+# Setting: Two years ago. Jason's manager's office. A different Jason — sharper, hungrier, no idea yet what "special accounts" means.
+
+Manager: Close the door.
+
+Manager: You've got the best close rate on the floor. I want to give you something bigger.
+
+Manager: A private buyer. Overseas. Pays triple standard commission.
+
+Jason: What's the catch?
+
+Manager: No catch. Just... this one doesn't go through the usual review. Buyer wants discretion, that's all.
+
+- Ask what "discretion" means. [if leverage >= 0] => deal_pressed
+- Just take the deal. [if compliance >= 0] => deal_accepted
+- Say you're not comfortable with it. => deal_hesitant
+
+~ deal_pressed
+
+Jason: Discretion meaning what, exactly?
+
+Manager: It means the export license is still "in process." It'll clear eventually. Paperwork's slow, not wrong.
+
+Manager: You're not signing anything illegal. You're closing a sale. Compliance handles compliance.
+
+do leverage += 1
+
+=> deal_pivot
+
+~ deal_accepted
+
+Jason: Sounds good. Send me the file.
+
+Manager: Good man. I knew you'd get it.
+
+Manager: Numbers on your desk by Friday. Don't mention this one at the floor meeting.
+
+do compliance += 1
+
+=> deal_pivot
+
+~ deal_hesitant
+
+Jason: I don't know, this doesn't sound like something I should be doing.
+
+Manager: (pause) Jason. Everyone on this floor has closed one of these. You think the guy with the corner office got there on standard commission?
+
+Manager: It's your call. But I only offer this once.
+
+=> deal_pivot
+
+~ deal_pivot
+
+Jason: (Three triple commissions. A corner office. "Compliance handles compliance.")
+
+Jason: (He took the file.)
+
+do Global.return_from_flashback()
+
+=> END

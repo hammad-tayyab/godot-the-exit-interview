@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bhhvhsnak41c4"
+path="res://.godot/imported/flashback_03.dialogue-1dfa61ba9cef91cca63d5adb208b3f60.tres"
+
+[deps]
+
+source_file="res://dialogues/flashback_03.dialogue"
+dest_files=["res://.godot/imported/flashback_03.dialogue-1dfa61ba9cef91cca63d5adb208b3f60.tres"]
+
+[params]
+
+defaults=true

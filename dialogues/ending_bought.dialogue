@@ -1,0 +1,22 @@
+using Global
+
+~ ending_start
+
+Noman: Sign here. And here.
+
+Jason: (He signs. The NDA. The severance letter. The silence.)
+
+Noman: Pleasure doing business, Jason. Don't make me see you again.
+
+if Global.marcus_path == "bought":
+	Jason: (He thought about Marcus on the drive home. He kept thinking about him for a long time after that.)
+elif Global.marcus_path == "told":
+	Jason: (He wondered, signing the last page, whether Marcus had gotten a deal even half this good. He suspected the answer.)
+
+Jason: (The money would cover a year, easy. He kept telling himself the number, like it would make the rest of it quieter.)
+
+# --- ENDING: BOUGHT ---
+# The "clean" complicit ending. Jason takes the deal, walks away safe
+# and wealthy, and carries all of it with him anyway.
+
+=> END

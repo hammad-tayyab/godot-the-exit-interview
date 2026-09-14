@@ -1,0 +1,71 @@
+using Global
+
+~ flashback_start
+
+# Setting: Six months ago. A private meeting room. Volkov, a returning buyer, wants to escalate the deal beyond software licensing.
+
+Volkov: The targeting software works well. My people are pleased.
+
+Volkov: Now I want the hardware interface. The part that lets it talk directly to a weapons platform.
+
+Jason: That's not something we sell. Not to anyone. Not even to you.
+
+Volkov: Everything is something you sell, Jason. We both know that by now.
+
+- Hold the line, no exceptions. [if leverage >= 0]
+	Jason: The software's the deal. It's the only deal. If that's not enough, we're done here.
+	do leverage += 1
+	do compliance -= 1
+	=> volkov_held_line
+
+- Offer a smaller compromise. [if compliance >= 0]
+	Jason: I can get you an expanded license — more units, priority support. Not the hardware interface. That's a line I won't cross.
+	do compliance += 1
+	=> volkov_compromise
+
+- Consider it, quietly.
+	Jason: Let me see what's actually possible. I'm not promising anything.
+	do leverage -= 1
+	do compliance += 1
+	=> volkov_considered
+
+~ volkov_held_line
+
+Volkov: (studies him for a long moment) Interesting. You have limits after all.
+
+Volkov: Fine. The software, expanded terms. We'll revisit the rest another time.
+
+Jason: (There wouldn't be another time. Jason already knew that. He just hadn't said it yet.)
+
+do Global.volkov_path = "held_line"
+
+=> buyer_returns_end
+
+~ volkov_compromise
+
+Volkov: Acceptable. For now.
+
+Jason: (For now. Volkov's favorite phrase. It always meant the conversation wasn't over.)
+
+do Global.volkov_path = "compromise"
+
+=> buyer_returns_end
+
+~ volkov_considered
+
+Volkov: Good. I like people who understand that "no" is rarely permanent.
+
+Jason: (He hadn't said yes. He also hadn't said no. He was starting to understand that was its own kind of answer.)
+
+do compliance -= 1
+do Global.volkov_path = "considered"
+
+=> buyer_returns_end
+
+~ buyer_returns_end
+
+Jason: (Driving home that night, Jason understood, for the first time clearly, that this didn't have a ceiling. He started drafting his resignation letter that weekend.)
+
+do Global.return_from_flashback()
+
+=> END

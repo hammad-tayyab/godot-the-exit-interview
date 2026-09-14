@@ -1,23 +1,29 @@
 extends Control
 
-@onready var music_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var mute_button: TextureButton = $MuteButton
-
-var is_muted: bool = false
+@onready var gallery_label: Label = $GalleryLabel
 
 var sound_on_icon: Texture2D = preload("res://images/sound_on (1).png")
 var sound_off_icon: Texture2D = preload("res://images/sound_off (1).png")
 
 func _ready() -> void:
-	pass # Replace with function body.
-
-func _process(delta: float) -> void:
-	pass
+	if gallery_label:
+		gallery_label.text = "Endings discovered: %d / 4" % Global.unlocked_endings.size()
 
 func _on_quit_game_pressed() -> void:
 	get_tree().quit()
 
+func _on_start_game_pressed() -> void:
+	var global_state := get_node_or_null("/root/Global")
+	if global_state:
+		global_state.start_new_session()
+	get_tree().change_scene_to_file("res://scenes/intro_scene.tscn")
+
 func _on_mute_button_pressed() -> void:
-	is_muted = !is_muted
-	music_player.volume_db = -80 if is_muted else 0
-	mute_button.texture_normal = sound_off_icon if is_muted else sound_on_icon
+	var game_audio := get_node_or_null("/root/GameAudio") as AudioStreamPlayer
+	if game_audio == null:
+		return
+	game_audio.set("is_muted", not bool(game_audio.get("is_muted")))
+	game_audio.volume_db = -80.0 if bool(game_audio.get("is_muted")) else 0.0
+	var muted := bool(game_audio.get("is_muted"))
+	mute_button.texture_normal = sound_off_icon if muted else sound_on_icon

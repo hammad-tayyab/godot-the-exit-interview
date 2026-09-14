@@ -1,12 +1,12 @@
 # The Exit Interview
 
-A noir dialogue game about talking your way out of trouble.
+A noir dialogue game about negotiating your silence.
 
 🚧 **In development** — main menu done, gameplay next.
 
 ## The idea
 
-You're a thief caught mid-burglary. You can't fight your way out — only talk your way out. Every choice either calms the homeowner down or makes them more suspicious. Let suspicion max out, and you're caught.
+Jason was a dealmaker for Gunman Corp, closing illegal arms deals with buyers who should not exist on paper. Now that he is leaving, Corporate Security wants to settle the price of his silence. Every choice balances Compliance against Leverage.
 
 ## What's done
 
@@ -14,12 +14,14 @@ You're a thief caught mid-burglary. You can't fight your way out — only talk y
 - Ambient dust particles + custom fonts
 - Working Start / Quit buttons
 - Music with mute toggle
+- First exit-interview scene with Compliance and Leverage choices
+- First flashback scaffold: “The Deal”
 
 ## What's next
 
-- Dialogue system with the homeowner
-- Suspicion meter
-- Win / lose states
+- Additional flashbacks and endings
+- Dialogue Manager integration and themed balloon UI
+- Bought / Threatened / Leveraged ending logic
 
 ## Running it
 

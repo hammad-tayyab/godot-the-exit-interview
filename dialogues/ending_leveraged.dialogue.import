@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://da4rsl6m5a5o5"
+path="res://.godot/imported/ending_leveraged.dialogue-809a15b4fa210a5eabfbada39d039803.tres"
+
+[deps]
+
+source_file="res://dialogues/ending_leveraged.dialogue"
+dest_files=["res://.godot/imported/ending_leveraged.dialogue-809a15b4fa210a5eabfbada39d039803.tres"]
+
+[params]
+
+defaults=true

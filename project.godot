@@ -15,10 +15,30 @@ run/main_scene="uid://cedhv6e4ixe5o"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Global.gd"
+GameAudio="*res://GameAudio.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+HUD="*res://ui/hud.tscn"
+
+[dialogue_manager]
+
+runtime/balloon_path="res://ui/dialogue_balloon.tscn"
+
 [display]
 
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialogues/interview_room_01.dialogue", "res://dialogues/flashback_01.dialogue", "res://dialogues/flashback_02.dialogue", "res://dialogues/ending_bought.dialogue", "res://dialogues/ending_buried.dialogue", "res://dialogues/ending_leveraged.dialogue", "res://dialogues/ending_threatened.dialogue", "res://dialogues/flashback_03.dialogue", "res://dialogues/intro_scene.dialogue", "res://dialogues/flashback_04.dialogue", "res://dialogues/flashback_05.dialogue")
+
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true

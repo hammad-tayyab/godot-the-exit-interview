@@ -1,0 +1,24 @@
+using Global
+
+~ ending_start
+
+Noman: (closes the folder) You know, most people in your position know when to stop talking.
+
+Noman: You're not most people. That's a problem for us.
+
+Noman: Security will walk you out. Personal effects will be shipped to you. Don't come back for them yourself.
+
+if Global.reckoning_choice == "copied":
+	Noman: The drive. We know you took it. It won't leave this building either.
+elif Global.marcus_path == "pressured":
+	Noman: You made a lot of enemies for someone who wanted this to be quiet, Jason. Marcus wasn't the only one who noticed.
+
+Jason: (The door didn't feel like an exit. It felt like the start of something he couldn't see the shape of yet.)
+
+# --- ENDING: BURIED (loss state) ---
+# Reachable two ways: (1) meters cross the early-loss threshold mid-game
+# and Global.check_for_early_loss() cuts straight here, or (2) final
+# tally lands here anyway. Either way this is the worst outcome —
+# Jason leaves with nothing and an open threat hanging over him.
+
+=> END

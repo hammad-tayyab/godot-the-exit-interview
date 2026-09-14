@@ -1,0 +1,56 @@
+using Global
+
+~ flashback_start
+
+# Setting: Jason's final day. His terminal, alone, 4:52pm. Access revokes at 5pm sharp. This is his last real window to act.
+
+Jason: (Nine deals. Nine sets of records. Four minutes.)
+
+Jason: (He could copy the export logs — the real ones, the ones that would blow the compartmentalized accounts wide open. Or he could clean his own trail instead. Or he could just walk away and leave everything exactly as it was.)
+
+- Copy the evidence. [if leverage >= 0]
+	Jason: (He plugs in the drive. The real logs. All nine deals, timestamped, unambiguous.)
+	do leverage += 2
+	do compliance -= 2
+	=> reckoning_copied
+
+- Clean his own trail. [if compliance >= 0]
+	Jason: (He doesn't copy anything. He spends the four minutes making sure his own name is as far from the paper trail as it can get.)
+	do compliance += 2
+	=> reckoning_cleaned
+
+- Walk away. Do nothing.
+	Jason: (He closes the terminal without touching anything. Whatever happens next, happens without him reaching for it.)
+	=> reckoning_walked
+
+~ reckoning_copied
+
+Jason: (The drive goes in his pocket at 4:58pm. Two minutes to spare. He has no idea yet whether that was brave or just reckless.)
+
+do Global.reckoning_choice = "copied"
+
+=> reckoning_end
+
+~ reckoning_cleaned
+
+Jason: (By 4:59pm, on paper, he looks like exactly what he wants to look like: careful, replaceable, forgettable.)
+
+do Global.reckoning_choice = "cleaned"
+
+=> reckoning_end
+
+~ reckoning_walked
+
+Jason: (5:00pm. The screen locks. He sits there for a second before he realizes it's actually over.)
+
+do Global.reckoning_choice = "walked"
+
+=> reckoning_end
+
+~ reckoning_end
+
+Jason: (Whatever he did or didn't do in those four minutes, it's the last thing that was ever fully his choice.)
+
+do Global.return_from_flashback()
+
+=> END

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://yi5a3iipaifa"
+path="res://.godot/imported/ending_buried.dialogue-6941a31bfe6312088ab3f7bf20100801.tres"
+
+[deps]
+
+source_file="res://dialogues/ending_buried.dialogue"
+dest_files=["res://.godot/imported/ending_buried.dialogue-6941a31bfe6312088ab3f7bf20100801.tres"]
+
+[params]
+
+defaults=true
