@@ -1,6 +1,6 @@
 extends AudioStreamPlayer
 
-## Persistent ambient score. As an Autoload node, it survives every scene change.
+# Persistent ambient score. Survives scene changes as an Autoload node.
 var is_muted := false
 var ambient_track: AudioStream = preload("res://audio/universfield-tense-atmosphere-129627.mp3")
 

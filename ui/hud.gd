@@ -1,8 +1,6 @@
 extends CanvasLayer
 
-# Danger zone starts one step before the actual loss threshold in Global,
-# so the warning appears BEFORE the player crosses into a loss — it's a
-# telegraph, not an after-the-fact notice.
+# Warning shows one step before the actual loss threshold, so it acts as a warning, not a death notice.
 const DANGER_ZONE := 2
 
 @onready var compliance_label: Label = $Margin/HBox/ComplianceLabel
@@ -19,7 +17,7 @@ func _ready() -> void:
 		warning_margin.visible = false
 
 func _process(_delta: float) -> void:
-	# The main menu owns its own controls. Keep this gameplay HUD out of its way.
+	# Only show this HUD during gameplay scenes, not menus or end screens
 	var current_scene := get_tree().current_scene
 	var is_gameplay_scene := current_scene != null \
 		and current_scene.scene_file_path.begins_with("res://scenes/") \
@@ -32,7 +30,6 @@ func _process(_delta: float) -> void:
 			warning_margin.visible = false
 		return
 
-	# Polling keeps the display current when Dialogue Manager mutates Global.
 	compliance_label.text = "Compliance %d" % Global.compliance
 	leverage_label.text = "Leverage %d" % Global.leverage
 	_update_warning()

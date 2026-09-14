@@ -1,26 +1,24 @@
 extends Node
 
-# --- Constants ---
 const SAVE_PATH := "user://exit_interview_save.json"
 const LOSE_COMPLIANCE_THRESHOLD := -3
 const LOSE_LEVERAGE_THRESHOLD := -3
 
-# --- Meters ---
+# Player meters
 var compliance := 0
 var leverage := 0
 
-# --- Flashback Return Tracking ---
+# Where to resume dialogue after a flashback
 var _return_dialogue_path := ""
 var _return_title := ""
 
-# --- Session & Ending State ---
+# Session flags
 var session_started := false
 var game_over := false
 var last_ending := ""
 var unlocked_endings: Array[String] = []
 
-# --- Specific Choice Tracking ---
-# Captures past decisions for dialogue callbacks and gambles
+# Tracks key choices made during the playthrough
 var marcus_path := ""       # "told" | "pressured" | "bought"
 var priya_path := ""        # "deflected" | "warned" | "escalated"
 var volkov_path := ""       # "held_line" | "compromise" | "considered"
@@ -28,14 +26,11 @@ var reckoning_choice := ""  # "copied" | "cleaned" | "walked"
 var escalation_backfired := false
 
 
-# --- Built-in Callbacks ---
-
 func _ready() -> void:
 	_load_unlocked_endings()
 
 
-# --- Session Management ---
-
+# Resets meters and flags, keeps unlocked endings, starts the session
 func start_new_session() -> void:
 	compliance = 0
 	leverage = 0
@@ -49,6 +44,7 @@ func start_new_session() -> void:
 	escalation_backfired = false
 	clear_return()
 
+# Full reset, goes back to main menu
 func reset_game() -> void:
 	compliance = 0
 	leverage = 0
@@ -68,8 +64,7 @@ func begin_interview() -> void:
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/interview_room.tscn")
 
 
-# --- Flashback Flow ---
-
+# Saves return point then loads the flashback scene
 func trigger_flashback(flashback_id: int, return_dialogue_path: String, return_title: String) -> void:
 	_return_dialogue_path = return_dialogue_path
 	_return_title = return_title
@@ -87,20 +82,19 @@ func has_pending_return() -> bool:
 	return _return_title != ""
 
 
-# --- Gamble Mechanics ---
-
+# 40% chance the escalation move backfires
 func roll_escalation_gamble() -> void:
 	escalation_backfired = (randf() < 0.4)
 
 
-# --- Win / Loss & Ending Evaluation ---
-
+# Called every frame from HUD; triggers loss if both meters tank
 func check_for_early_loss() -> void:
 	if game_over:
 		return
 	if compliance <= LOSE_COMPLIANCE_THRESHOLD and leverage <= LOSE_LEVERAGE_THRESHOLD:
 		go_to_ending("buried")
 
+# Picks the correct ending based on final meter values
 func evaluate_final_ending() -> void:
 	if game_over:
 		return
@@ -124,8 +118,7 @@ func go_to_ending(ending_id: String) -> void:
 	get_tree().call_deferred("change_scene_to_file", "res://scenes/ending_%s.tscn" % ending_id)
 
 
-# --- Persistence ---
-
+# Load unlocked endings from disk
 func _load_unlocked_endings() -> void:
 	if not FileAccess.file_exists(SAVE_PATH):
 		return
@@ -137,6 +130,7 @@ func _load_unlocked_endings() -> void:
 	if typeof(data) == TYPE_DICTIONARY and data.has("unlocked_endings"):
 		unlocked_endings.assign(data["unlocked_endings"])
 
+# Save unlocked endings to disk
 func _save_unlocked_endings() -> void:
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file == null:

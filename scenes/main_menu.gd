@@ -14,9 +14,7 @@ func _on_quit_game_pressed() -> void:
 	get_tree().quit()
 
 func _on_start_game_pressed() -> void:
-	var global_state := get_node_or_null("/root/Global")
-	if global_state:
-		global_state.start_new_session()
+	Global.start_new_session()
 	get_tree().change_scene_to_file("res://scenes/intro_scene.tscn")
 
 func _on_mute_button_pressed() -> void:
